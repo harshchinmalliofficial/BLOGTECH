@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import Form from "@components/Form";
 import { useRouter, useSearchParams } from "next/navigation";
-import Loading from "@components/Loading"; // Import your loading component
+import Loading from "@components/loading"; // Import your loading component
 
 const EditPrompt = () => {
   const [submitting, setSubmitting] = useState(false);
