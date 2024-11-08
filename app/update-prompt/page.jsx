@@ -1,6 +1,6 @@
 "use client"; // Marking this file as a Client Component
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Form from "@components/Form";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -61,15 +61,18 @@ const EditPrompt = () => {
   };
 
   return (
-    <div className="w-full">
-      <Form
-        type="Edit"
-        post={post}
-        setPost={setPost}
-        submitting={submitting}
-        handleSubmit={updatePrompt}
-      />
-    </div>
+    // Wrapping the component with Suspense to handle async rendering
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="w-full">
+        <Form
+          type="Edit"
+          post={post}
+          setPost={setPost}
+          submitting={submitting}
+          handleSubmit={updatePrompt}
+        />
+      </div>
+    </Suspense>
   );
 };
 
