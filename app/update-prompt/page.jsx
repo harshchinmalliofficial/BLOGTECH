@@ -1,16 +1,15 @@
 "use client"; // Marking this file as a Client Component
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Form from "@components/Form";
-import { useRouter, useSearchParams } from "next/navigation"; // Use `next/navigation` for client-side navigation in the app directory
+import { useRouter, useSearchParams } from "next/navigation";
 
 const EditPrompt = () => {
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: "", tag: "" });
   const searchParams = useSearchParams();
-  const promptId = searchParams.get("id"); // Directly retrieving from search params
+  const promptId = searchParams.get("id");
   const router = useRouter();
-  // console.log(promptId);
 
   useEffect(() => {
     const getPromptDetails = async () => {
@@ -62,15 +61,17 @@ const EditPrompt = () => {
   };
 
   return (
-    <div className="w-full">
-      <Form
-        type="Edit"
-        post={post}
-        setPost={setPost}
-        submitting={submitting}
-        handleSubmit={updatePrompt}
-      />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="w-full">
+        <Form
+          type="Edit"
+          post={post}
+          setPost={setPost}
+          submitting={submitting}
+          handleSubmit={updatePrompt}
+        />
+      </div>
+    </Suspense>
   );
 };
 
